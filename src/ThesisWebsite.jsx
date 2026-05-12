@@ -741,19 +741,61 @@ function AboutThesisPage() {
       </PageHero>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <SectionHeader eyebrow="Research Focus" title="Probabilistic Cloud Workload Forecasting" />
-          <p className="text-lg leading-8 text-slate-300">
-            The Diffusion Autoformer estimates the future distribution of job arrival rates rather than only a single
-            deterministic value. It uses historical workload data and exogenous temporal features to produce point
-            forecasts and prediction intervals for proactive cloud resource provisioning.
-          </p>
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div>
+            <SectionHeader eyebrow="Research Focus" title="Probabilistic Cloud Workload Forecasting">
+              The Diffusion Autoformer estimates the future distribution of job arrival rates rather than only a single
+              deterministic value.
+            </SectionHeader>
+            <p className="mt-6 text-lg leading-8 text-slate-300">
+              It uses historical workload data and exogenous temporal features to produce point forecasts and prediction
+              intervals for proactive cloud resource provisioning. The model is designed for workload traces where sudden
+              traffic changes, repeating temporal patterns, and resource-planning uncertainty must be handled together.
+            </p>
+          </div>
+
+          <div className="grid gap-4 rounded-lg border border-white/10 bg-[#081316] p-5 shadow-2xl shadow-black/20 sm:grid-cols-3">
+            {[
+              ["Goal", "Predict job arrivals"],
+              ["Model", "Diffusion Autoformer"],
+              ["Use", "Cloud auto-scaling"],
+            ].map(([label, value]) => (
+              <div key={label} className="rounded-lg bg-white/[0.055] p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{label}</p>
+                <p className="mt-3 text-xl font-black leading-tight text-white">{value}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {thesisHighlights.map((item) => (
             <StatCard key={item.title} {...item} />
           ))}
+        </div>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          <article className="rounded-lg border border-teal-300/20 bg-teal-300/10 p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal-200">Why It Matters</p>
+            <h3 className="mt-3 text-2xl font-black text-white">Forecasts become provisioning decisions.</h3>
+            <p className="mt-4 text-sm leading-7 text-slate-300">
+              Accurate job-arrival prediction helps cloud systems prepare resources before demand spikes, reducing both
+              under-provisioning risk and unnecessary over-allocation.
+            </p>
+          </article>
+
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              ["01", "Decompose workload trends and seasonal structure."],
+              ["02", "Learn long-range dependencies with Autoformer attention."],
+              ["03", "Use diffusion denoising to support robust forecasting."],
+            ].map(([step, detail]) => (
+              <article key={step} className="rounded-lg border border-white/10 bg-white/[0.045] p-5">
+                <p className="text-sm font-black text-amber-300">{step}</p>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </Section>
     </>
@@ -809,9 +851,9 @@ function AboutManojPage() {
         ICT consultant, technical program manager, telecom infrastructure specialist, and cloud computing researcher.
       </PageHero>
       <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <div className="overflow-hidden rounded-lg border border-teal-300/20 bg-slate-900">
-            <img src="/manoj.jpg" alt="Manoj Kumar Chauhan" className="aspect-[4/5] h-full w-full object-cover" />
+        <div className="grid gap-10 lg:grid-cols-[0.55fr_1.45fr] lg:items-start">
+          <div className="mx-auto w-full max-w-xs overflow-hidden rounded-lg border border-teal-300/20 bg-slate-900 shadow-2xl shadow-black/25 lg:mx-0">
+            <img src="/manoj.jpg" alt="Manoj Kumar Chauhan" className="aspect-[3/4] h-full w-full object-cover" />
           </div>
 
           <div>
