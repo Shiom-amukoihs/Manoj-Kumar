@@ -51,6 +51,9 @@ const architectureStages = [
   },
 ];
 
+const architectureExplanation =
+  "The forecasting pipeline begins with an input tensor representing raw workload time series and a target tensor used for loss computation during training. The series composition block decomposes the data into moving average, trend, and seasonal components. These are then processed by the Autoformer encoder, which applies forward diffusion steps to learn stable latent features. A diffusion process probabilistically refines these features to generate the final forecast. Throughout the pipeline, trend, seasonal, and contextual information flow between blocks and condition the diffusion process. In essence, the workflow follows the sequence: Decompose -> Encode -> Diffuse -> Forecast.";
+
 const resultRows = [
   { dataset: "Facebook-5m", loadDynamics: 47.2, wgan: 42.11, autoformer: 45, daf: 40.53 },
   { dataset: "Facebook-10m", loadDynamics: 18.5, wgan: 16.2, autoformer: 17, daf: 18.39 },
@@ -327,6 +330,21 @@ function ArchitectureMap() {
   );
 }
 
+function ArchitectureDiagram() {
+  return (
+    <figure className="mt-10 overflow-hidden rounded-lg border border-white/10 bg-slate-50 p-4 shadow-2xl shadow-black/25">
+      <img
+        src="/Arch.png"
+        alt="Diffusion Autoformer forecasting pipeline showing tensor input, series composition, Autoformer encoder, diffusion process, and output projection."
+        className="h-auto w-full rounded-md object-contain"
+      />
+      <figcaption className="sr-only">
+        Diffusion Autoformer workflow: decompose, encode, diffuse, and forecast.
+      </figcaption>
+    </figure>
+  );
+}
+
 function ResultsChart() {
   const max = 50;
   const chartWidth = 96 + resultRows.length * 92;
@@ -489,6 +507,21 @@ function ResultsChart() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ResultsMapeImage() {
+  return (
+    <figure className="mt-10 overflow-hidden rounded-lg border border-white/10 bg-white p-4 shadow-2xl shadow-black/25">
+      <img
+        src="/MAPE_Workload_dataset.png"
+        alt="MAPE comparison with different workload datasets for LoadDynamics, WGAN-gp, Autoformer, and DAF."
+        className="h-auto w-full rounded-md object-contain"
+      />
+      <figcaption className="sr-only">
+        Table 2 MAPE comparison across workload datasets.
+      </figcaption>
+    </figure>
   );
 }
 
@@ -810,6 +843,11 @@ function ArchitecturePage() {
         conditioning, and diffusion-based denoising to generate stable workload predictions with uncertainty bounds.
       </PageHero>
       <Section className="bg-[#0a1416]">
+        <ArchitectureDiagram />
+        <div className="mt-8 rounded-lg border border-teal-300/20 bg-teal-300/10 p-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal-200">Pipeline Explanation</p>
+          <p className="mt-4 text-lg leading-8 text-slate-200">{architectureExplanation}</p>
+        </div>
         <ArchitectureMap />
       </Section>
     </>
@@ -824,6 +862,7 @@ function ResultsPage() {
         including Google Cluster, Azure VM, Alibaba, Facebook, and Wikipedia.
       </PageHero>
       <Section>
+        <ResultsMapeImage />
         <ResultsChart />
       </Section>
     </>
